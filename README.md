@@ -1,6 +1,6 @@
 # TOC Project 2017
 
-Template Code for TOC Project 2017
+The program use the template Code from TA
 
 A telegram bot based on a finite state machine
 
@@ -17,23 +17,6 @@ pip install -r requirements.txt
 * pygraphviz (For visualizing Finite State Machine)
     * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
 
-### Secret Data
-
-`API_TOKEN` and `WEBHOOK_URL` in app.py **MUST** be set to proper values.
-Otherwise, you might not be able to run your code.
-
-### Run Locally
-You can either setup https server or using `ngrok` as a proxy.
-
-**`ngrok` would be used in the following instruction**
-
-```sh
-ngrok http 5000
-```
-
-After that, `ngrok` would generate a https URL.
-
-You should set `WEBHOOK_URL` (in app.py) to `your-https-URL/hook`.
 
 #### Run the sever
 
@@ -45,17 +28,42 @@ python3 app.py
 ![fsm](./img/show-fsm.png)
 
 ## Usage
-The initial state is set to `user`.
+The initial state is set to `what_do_you_find`.
+The program is used to search the Tainan bus information.
+There are 3 functions in this program.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+*search the route picture:
+    input the bus route , it will return a route picture for you.
+    if you input the route name not exist, it will give you alert "查無此路線！請重新輸入：" .
+*search time table
+    input the bus route and go forward or backward , it will return a time table within 5 hours for you.
+    if you input the route name not exist, it will give you alert "查無此路線！請重新輸入：".
+    if there is no bus today , it will return you "末班駛離".
+*list all bus stops of the bus route you want to know
+    input the bus route , it will return all bus stops of the bus route you want to know.
+    if you input the route name not exist, it will give you alert "查無此路線！請重新輸入：" .
 
-* user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
+* what_do_you_find
+	* Input: any string include "路線圖"
+		* Reply: "請輸入欲查詢的路線"
+	* Input: any string include "時刻表"
+		* Reply: "請輸入欲查詢的路線"
+	* Input: any string include "站牌"
+		* Reply: "請輸入欲查詢的路線"
+*route_pic
+	* Input: the bus route name. Ex:"綠幹線"
+		* Reply: a route picture you need
+*time_table
+	* Input: the bus route name. Ex:"綠幹線"
+		* Reply: "請輸入去程或返程"
+*stop_name
+	* Input: the bus route name. Ex:"綠幹線"
+		* Reply: all stop names of the bus route
+*which_time_table
+	* Input: "去程" 
+		* Reply: all forward bus time table within 5 hours
+	* Input: "返程"
+		* Reply: all backward bus time table within 5 hours
+           
 
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
 
-
-## Author
-[Lee-W](https://github.com/Lee-W)
